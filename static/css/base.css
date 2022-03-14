@@ -8,7 +8,6 @@ body {
     background: url('/media/home_background.jpeg') no-repeat center center fixed;
     background-size: cover;
     height: calc(100vh - 164px);
-    color: #555;
     font-family: 'Roboto Serif', serif;
 }
 
@@ -33,6 +32,7 @@ body {
     background: black;
     color: white;
     min-width: 260px;
+    border: 1px solid rgb(148, 74, 233) !important;
 }
 
 .btn-black {
@@ -54,8 +54,23 @@ body {
     color: #000 !important;
 }
 
-.border-black {
-    border: 1px solid black !important;
+.text-purple {
+    color: rgb(148, 74, 233);
+}
+
+.text-white {
+    color: white;
+}
+
+.black-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgb(148, 74, 233) !important;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.border-purple {
+    border: 1px solid rgb(148, 74, 233) !important;
 }
 
 /* -------------------------------- Media Queries */
