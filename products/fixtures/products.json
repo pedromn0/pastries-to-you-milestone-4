@@ -1,0 +1,98 @@
+[
+    {
+       "pk": 1,
+       "model": "products.product",
+       "fields":{
+          "sku": "pp2001",
+          "name": "Almond chocolate croissant",
+          "description": "Delicious sweet pastry made from almonds and filled with chocolate chips",
+          "price": 4.99,
+          "category": 3,
+          "sweet_sauvory": "sweet",
+          "included_unity": "1 croissant",
+          "allergens": "Wheat, milk, soya, egg",
+          "image_url": "https://cnz.to/wp-content/uploads/2006/03/almond_croissants-2.jpg",
+          "image": ""
+       }
+    },
+    {
+       "pk":2,
+       "model":"products.product",
+       "fields": {
+          "sku": "pp2002",
+          "name": "Croissant",
+          "description": "Buttery, flaky and perfect croissants",
+          "price": 3.99,
+          "category": 2,
+          "sweet_sauvory": "sauvory",
+          "included_unity": "1 croissant",
+          "allergens": "Wheat, milk, soya, egg",
+          "image_url": "",
+          "image": "croissant.jpeg"
+       }
+    },
+    {
+        "pk":3,
+        "model":"products.product",
+        "fields": {
+           "sku": "pp2003",
+           "name": "Chocolate Cake",
+           "description": "Chocolate cake with soft and dough and dark chocolate coating",
+           "price": 25.99,
+           "category": 2,
+           "sweet_sauvory": "sweet",
+           "included_unity": "The whole cake",
+           "allergens": "Wheat, milk, soya, egg, chocolate",
+           "image_url": "",
+           "image": "choco_cake.jpeg"
+        }
+     },
+     {
+        "pk":4,
+        "model":"products.product",
+        "fields": {
+           "sku": "pp2004",
+           "name": "Chocolate Cake",
+           "description": "Sponge cake dough filled with strawberries and chantilly",
+           "price": 27.99,
+           "category": 2,
+           "sweet_sauvory": "sweet",
+           "included_unity": "The whole cake",
+           "allergens": "Wheat, milk, soya, egg",
+           "image_url": "",
+           "image": "strawberry_cake.jpeg"
+        }
+     },
+     {
+        "pk":5,
+        "model":"products.product",
+        "fields": {
+           "sku": "pp2005",
+           "name": "Sourdough bread",
+           "description": "A perfect sourdough bread with golden crust and chewy, air interior",
+           "price": 10.99,
+           "category": 1,
+           "sweet_sauvory": "sauvory",
+           "included_unity": "The whole bread",
+           "allergens": "Wheat, milk, soya, egg",
+           "image_url": "",
+           "image": "sourdough_bread.jpeg"
+        }
+     },
+     {
+        "pk":6,
+        "model":"products.product",
+        "fields": {
+           "sku": "pp2006",
+           "name": "Sonho Bread",
+           "description": "Sponge dough filled with vanila cream and cover with icing sugar",
+           "price": 4.00,
+           "category": 1,
+           "sweet_sauvory": "sweet",
+           "included_unity": "1 bread",
+           "allergens": "Wheat, milk, soya, egg",
+           "image_url": "",
+           "image": "sweet_bread.jpeg"
+        }
+     }
+ ]
