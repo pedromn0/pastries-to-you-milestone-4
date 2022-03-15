@@ -52,7 +52,7 @@
         "model":"products.product",
         "fields": {
            "sku": "pp2004",
-           "name": "Chocolate Cake",
+           "name": "Strawberry Cake",
            "description": "Sponge cake dough filled with strawberries and chantilly",
            "price": 27.99,
            "category": 2,
@@ -85,7 +85,7 @@
         "fields": {
            "sku": "pp2006",
            "name": "Sonho Bread",
-           "description": "Sponge dough filled with vanila cream and cover with icing sugar",
+           "description": "Sponge dough filled with vanila cream and covered with icing sugar",
            "price": 4.00,
            "category": 1,
            "sweet_sauvory": "sweet",
@@ -94,5 +94,165 @@
            "image_url": "",
            "image": "sweet_bread.jpeg"
         }
-     }
+     },
+     {
+      "pk":7,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2007",
+         "name": "Fruit Scone",
+         "description": "A perfect fruit scone for a tea-time treat",
+         "price": 3.50,
+         "category": 4,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 scone",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "fruit_scone.jpeg"
+      }
+   },
+   {
+      "pk":8,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2008",
+         "name": "Plane Scone",
+         "description": "A perfect scone for a tea-time treat",
+         "price": 3.00,
+         "category": 4,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 scone",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "plane_scones.jpeg"
+      }
+   },
+   {
+      "pk":9,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2009",
+         "name": "Cinnamon Roll",
+         "description": "A fresh cinnamon roll with soft dough and perfected sweetned",
+         "price": 4.00,
+         "category": 5,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 cinnamon roll",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "cinnamon_roll.jpeg"
+      }
+   },
+   {
+      "pk":10,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2010",
+         "name": "Honey Almond Dream",
+         "description": "Own recipe derived from danish pastry made with puff dough and salted with caramelised almond",
+         "price": 5.00,
+         "category": 5,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 danish",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "almond_puff.jpeg"
+      }
+   },
+   {
+      "pk":11,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2011",
+         "name": "Chocolate Cookie",
+         "description": "Delicious crunchy chocolate cookie",
+         "price": 2.50,
+         "category": 6,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 cookie",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "almond_puff.jpeg"
+      }
+   },
+   {
+      "pk":12,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2012",
+         "name": "Jam Cookie",
+         "description": "Cookie filled with raspberry jam",
+         "price": 3.25,
+         "category": 6,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 cookie",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "jam_cookie.jpeg"
+      }
+   },
+   {
+      "pk":13,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2013",
+         "name": "Lemon Tart",
+         "description": "Soft creamy filling with touch of lemon",
+         "price": 17.50,
+         "category": 7,
+         "sweet_sauvory": "sweet",
+         "included_unity": "The whole lemon tart",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "lemon_tart.jpeg"
+      }
+   },
+   {
+      "pk":14,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2014",
+         "name": "Strawberry Tart",
+         "description": "Dough filled with custard and strawberry on top",
+         "price": 6.00,
+         "category": 7,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 mini strawberry tart",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "strawberry_tart.jpeg"
+      }
+   },
+   {
+      "pk":15,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2015",
+         "name": "Brownie",
+         "description": "Delicious chocolate brownie",
+         "price": 4.20,
+         "category": 8,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 brownie",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "brownie.jpeg"
+      }
+   },
+   {
+      "pk":16,
+      "model":"products.product",
+      "fields": {
+         "sku": "pp2016",
+         "name": "Caramel Macaroons",
+         "description": "Macaroons filles with caramel",
+         "price": 2.20,
+         "category": 8,
+         "sweet_sauvory": "sweet",
+         "included_unity": "1 macaroon",
+         "allergens": "Wheat, milk, soya, egg",
+         "image_url": "",
+         "image": "macaroons.jpeg"
+      }
+   }
  ]
