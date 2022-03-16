@@ -3,6 +3,10 @@ from .models import Product, Category
 
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
+    """
+    Custom view in product admin
+    """
+
     list_display = (
         'sku',
         'name',
@@ -15,6 +19,10 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ('sku',)
 
 class CategoryAdmin(admin.ModelAdmin):
+    """
+    Custom view in category admin
+    """
+    
     list_display = (
         'friendly_name',
         'name',

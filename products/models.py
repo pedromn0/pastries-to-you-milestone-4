@@ -5,7 +5,7 @@ from django.db import models
 
 class Category(models.Model):
     """
-    Categroies from fixtures
+    Category models sctructure
     """
 
     class Meta():
@@ -23,7 +23,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     """
-    Products from fixtures
+    Products models sctructure
     """
 
     category = models.ForeignKey(

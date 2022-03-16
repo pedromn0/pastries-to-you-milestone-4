@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">Products</h2>
+                <hr class="w-50 mb-1">
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
+            {% for product in products %}
+                <div class="col mb-4">
+                    <div class="card h-100 rounded-4 border-purple">
+                        {% if product.image %}
+                            <a href="">
+                                <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            </a>
+                        {% elif product.image_url %}
+                            <a href="">
+                                <img class="card-img-top img-fluid" src="{{ product.image_url }}" alt="{{ product.name }}">
+                            </a>
+                        {% else %}
+                            <a href="">
+                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                            </a>
+                        {% endif %}
+                        <div class="card-body text-left">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title mb-0 text-purple">{{ product.name }}</h5>
+                                    <p class="lead mb-0 text-left font-weight-bold">€{{ product.price }}</p>
+                                    {% if product.category %}
+                                        <small class="text-muted"><i class="fas fa-tags mr-1"></i>{{ product.category }}</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock %}
