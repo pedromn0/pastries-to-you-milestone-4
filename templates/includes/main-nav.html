@@ -19,7 +19,7 @@
                 <a href="" class="dropdown-item text-purple">By Price</a>
                 <a href="" class="dropdown-item text-purple">All sauvory</a>
                 <a href="" class="dropdown-item text-purple">All sweets</a>
-                <a href="" class="dropdown-item text-purple">All breads</a>
+                <a href="{% url 'products' %}?category=breads" class="dropdown-item text-purple">All breads</a>
             </div>
         </li>
 
@@ -29,7 +29,7 @@
             </a>
             <div class="dropdown-menu border-0 text-purple" aria-labelledby="cakes-link">
                 <a href="" class="dropdown-item text-purple">By Price</a>
-                <a href="" class="dropdown-item text-purple">All cakes</a>
+                <a href="{% url 'products' %}?category=cakes" class="dropdown-item text-purple">All cakes</a>
             </div>
         </li>
 
@@ -41,7 +41,7 @@
                 <a href="" class="dropdown-item text-purple">By Price</a>
                 <a href="" class="dropdown-item text-purple">All sauvory</a>
                 <a href="" class="dropdown-item text-purple">All sweets</a>
-                <a href="" class="dropdown-item text-purple">All croissant</a>
+                <a href="{% url 'products' %}?category=croissants" class="dropdown-item text-purple">All croissant</a>
             </div>
         </li>
 
@@ -50,12 +50,12 @@
                 Miscellaneous
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="miscellaneous-link">
-                <a href="" class="dropdown-item text-purple">Scones</a>
-                <a href="" class="dropdown-item text-purple">Danish</a>
-                <a href="" class="dropdown-item text-purple">Cookies</a>
-                <a href="" class="dropdown-item text-purple">Tart</a>
-                <a href="" class="dropdown-item text-purple">Dessert</a>
-                <a href="" class="dropdown-item text-purple">All miscellaneous</a>
+                <a href="{% url 'products' %}?category=scones" class="dropdown-item text-purple">Scones</a>
+                <a href="{% url 'products' %}?category=danish" class="dropdown-item text-purple">Danish</a>
+                <a href="{% url 'products' %}?category=cookies" class="dropdown-item text-purple">Cookies</a>
+                <a href="{% url 'products' %}?category=tart" class="dropdown-item text-purple">Tart</a>
+                <a href="{% url 'products' %}?category=desserts" class="dropdown-item text-purple">Dessert</a>
+                <a href="{% url 'products' %}?category=scones,danish,cookies,tart,dessert" class="dropdown-item text-purple">All miscellaneous</a>
             </div>
         </li>
     </ul>
