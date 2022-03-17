@@ -107,6 +107,28 @@ body {
     }
 
     .header-container {
-        padding-top: 164px;
+        padding-top: 100px;
+    }
+}
+
+/* pad the top a bit when navbar is collapsed small */
+@media (max-width: 991px) {
+    .header-container {
+        padding-top: 90px;
+    }
+
+    body {
+        height: calc(100vh - 116px);
+    }
+}
+
+/* pad the top a bit when navbar is collapsed mobile */
+@media only screen and (max-width: 450px) {
+    .header-container {
+        padding-top: 102px;
+    }
+
+    body {
+        height: calc(100vh - 116px);
     }
 }

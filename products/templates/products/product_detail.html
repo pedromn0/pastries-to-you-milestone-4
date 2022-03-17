@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container header-container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="image-container my-5">
+                    {% if product.image %}
+                            <a href="{{ product.image.url }}" target="_blank">
+                                <img class="shadow card-img-top img-fluid border-purple" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            </a>
+                        {% elif product.image_url %}
+                            <a href="">
+                                <img class="shadow card-img-top img-fluid border-purple" src="{{ product.image_url }}" alt="{{ product.name }}">
+                            </a>
+                        {% else %}
+                            <a href="">
+                                <img class="shadow card-img-top img-fluid border-purple" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                            </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mt-5">
+                <h5 class="card-title mb-0 text-purple">{{ product.name }}</h5>
+                <p class="lead mb-0 text-left font-weight-bold">€{{ product.price }}</p>
+                <p class="mb-0"><strong>Unity included:</strong> {{ product.included_unity }}</p>
+                {% if product.category %}
+                    <small class="text-muted"><i class="fas fa-tags mr-1"></i>{{ product.category }}</small>
+                {% endif %}
+                <p class="mb-0"><strong>Taste:</strong> {{ product.sweet_sauvory }}</p>
+                <p class="mb-0"> <strong>Allergens:</strong> {{ product.allergens }}</p>
+                <p class="mb-0"><strong>Description:</strong> {{ product.description }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
