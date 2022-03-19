@@ -12,12 +12,19 @@ def all_products(request):
     products = Product.objects.all()
     query = None
     categories = None
+    sweet_sauvory_query = None
 
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
+
+            # Second query to lookout to Sweet or Savoury field
+            if 'sweet_sauvory' in request.GET:
+                sweet_sauvory_query = request.GET['sweet_sauvory']
+                products = products.filter(
+                    sweet_sauvory=sweet_sauvory_query)
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -34,6 +41,7 @@ def all_products(request):
         'products': products,
         'search_term': query,
         'current_categories': categories,
+        'sweet_sauvory ': sweet_sauvory_query,
     }
 
     return render(request, 'products/products.html', context)

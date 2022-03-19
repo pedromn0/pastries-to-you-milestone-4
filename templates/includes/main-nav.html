@@ -7,6 +7,8 @@
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
                 <a href="" class="dropdown-item text-purple">By Price</a>
                 <a href="" class="dropdown-item text-purple">By Category</a>
+                <a href="{% url 'products' %}?category=breads,cakes,croissants,scones,danish,cookies,tart,dessert&sweet_sauvory=sweet" class="dropdown-item text-purple">All Sweets</a>
+                <a href="{% url 'products' %}?category=breads,cakes,croissants,scones,danish,cookies,tart,dessert&sweet_sauvory=sauvory" class="dropdown-item text-purple">All Sauvory</a>
                 <a href="{% url 'products' %}" class="dropdown-item text-purple">All Products</a>
             </div>
         </li>
@@ -17,8 +19,8 @@
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="breads-link">
                 <a href="" class="dropdown-item text-purple">By Price</a>
-                <a href="" class="dropdown-item text-purple">All sauvory</a>
-                <a href="" class="dropdown-item text-purple">All sweets</a>
+                <a href="{% url 'products' %}?category=breads&sweet_sauvory=sauvory" class="dropdown-item text-purple">All sauvory</a>
+                <a href="{% url 'products' %}?category=breads&sweet_sauvory=sweet" class="dropdown-item text-purple">All sweets</a>
                 <a href="{% url 'products' %}?category=breads" class="dropdown-item text-purple">All breads</a>
             </div>
         </li>
@@ -39,8 +41,8 @@
             </a>
             <div class="dropdown-menu border-0 text-purple" aria-labelledby="croissant-link">
                 <a href="" class="dropdown-item text-purple">By Price</a>
-                <a href="" class="dropdown-item text-purple">All sauvory</a>
-                <a href="" class="dropdown-item text-purple">All sweets</a>
+                <a href="{% url 'products' %}?category=croissants&sweet_sauvory=sauvory" class="dropdown-item text-purple">All sauvory</a>
+                <a href="{% url 'products' %}?category=croissants&sweet_sauvory=sweet" class="dropdown-item text-purple">All sweets</a>
                 <a href="{% url 'products' %}?category=croissants" class="dropdown-item text-purple">All croissant</a>
             </div>
         </li>
