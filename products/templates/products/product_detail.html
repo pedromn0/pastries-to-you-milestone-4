@@ -35,7 +35,11 @@
                 <p class="lead mb-0 text-left font-weight-bold">€{{ product.price }}</p>
                 <p class="mb-0"><strong>Unity included:</strong> {{ product.included_unity }}</p>
                 {% if product.category %}
-                    <small class="text-muted"><i class="fas fa-tags mr-1"></i>{{ product.category }}</small>
+                    <p class="mt-1 mb-0">
+                        <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
+                            <small class="text-muted"><i class="fas fa-tags mr-1"></i>{{ product.category.friendly_name }}</small>
+                        </a>
+                    </p>
                 {% endif %}
                 <p class="mb-0"><strong>Taste:</strong> {{ product.sweet_sauvory }}</p>
                 <p class="mb-0"> <strong>Allergens:</strong> {{ product.allergens }}</p>
