@@ -47,7 +47,16 @@
                                         <p class="my-0">€{{ item.product.price }}</p>
                                     </td>
                                     <td class="py-3 w-25">
-                                        <p class="my-0">{{ item.quantity }}</p>
+                                        <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
+                                            {% csrf_token %}
+                                            <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                        </form>
+                                        <a class="btn-sm float-left p-0 m-0 remove-item" id="remove_{{ item.item_id }}" href="">
+                                            <p>Remove <i class="fas fa-backspace text-danger d-sm-inline d-md-inline p-0 m-0"></i></p>
+                                        </a>
+                                        <a class="update-link btn-sm float-right p-0 m-0" href="">
+                                            <p>Update <i class="fas fa-check text-success d-sm-inline d-md-inline p-0 m-0"></i></p>
+                                        </a>
                                     </td>
                                     <td class="py-3">
                                         <p class="my-0">€{{ item.product.price }}</p>
@@ -58,7 +67,7 @@
                                 <td colspan="5" class="pt-5 text-right">
                                     <h6><strong>Total selected: €{{ total|floatformat:2 }}</strong></h6>
                                     {% if delivery_available_delta > 0 %}
-                                        <h6>Just collections available in orders below €30</h6>
+                                        <h6>Only collections available in orders below €30</h6>
                                     {% else %}
                                         <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
                                     {% endif %}
@@ -100,4 +109,29 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+
+<script text="text/javascript">
+    // Submit quantity form using the update link
+    $('.update-link').click(function(e){
+        var form = $(this).prev('.update-form');
+        form.submit();
+    })
+
+    // Remove quantity form using the update link
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var url = `/bag/remove/${itemId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
+</script>
 {% endblock %}
