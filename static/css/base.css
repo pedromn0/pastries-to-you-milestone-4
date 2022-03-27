@@ -77,6 +77,10 @@ body {
     background-color: rgb(148, 74, 233);
 }
 
+.bg-warning-lg-purple {
+    background-color: rgba(148, 74, 233, 0.377);
+}
+
 .overlay {
 	height: 100%;
 	width: 100%;
@@ -115,6 +119,13 @@ body {
 
 .toast.capper {
     height: 2px;
+}
+
+.bag-notification-wrapper {
+    max-height: 150px;
+    min-height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* -------------------------------- Media Queries */

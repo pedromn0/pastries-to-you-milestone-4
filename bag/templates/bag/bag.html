@@ -38,11 +38,21 @@
                             {% for item in bag_items %}
                                 <tr>
                                     <td class="p-3 w-25">
-                                        <img class="img-fluid rounded shadow" src="{{ item.product.image.url }}">
+                                        {% if item.product.image %}
+                                            <img class="card-img-top img-fluid shadow rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                        {% elif item.product.image_url %}
+                                            <img class="card-img-top img-fluid shadow rounded" src="{{ item.product.image_url }}" alt="{{ item.product.name }}">
+                                        {% else %}
+                                            <img class="card-img-top img-fluid shadow rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                        {% endif %}
                                     </td>
                                     <td class="py-3">
                                         <p class="my-0 text-purple"><strong>{{ item.product.name }}</strong></p>
-                                        <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
+                                        <p class="mt-1 mb-0">
+                                            <a class="text-muted" href="{% url 'products' %}?category={{ item.product.category.name }}">
+                                                <small class="text-muted"><i class="fas fa-tags mr-1"></i>{{ item.product.category.friendly_name }}</small>
+                                            </a>
+                                        </p>
                                     </td>
                                     <td class="py-3">
                                         <p class="my-0">€{{ item.product.price }}</p>
@@ -53,10 +63,10 @@
                                             <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                         </form>
                                         <a class="btn-sm float-left p-0 m-0 remove-item" id="remove_{{ item.item_id }}" href="">
-                                            <p>Remove <i class="fas fa-backspace text-danger d-sm-inline d-md-inline p-0 m-0"></i></p>
+                                            Remove <i class="fas fa-backspace text-danger d-sm-inline d-md-inline p-0 m-0"></i>
                                         </a>
                                         <a class="update-link btn-sm float-right p-0 m-0" href="">
-                                            <p>Update <i class="fas fa-check text-success d-sm-inline d-md-inline p-0 m-0"></i></p>
+                                            Update <i class="fas fa-check text-success d-sm-inline d-md-inline p-0 m-0"></i>
                                         </a>
                                     </td>
                                     <td class="py-3">
@@ -119,7 +129,7 @@
     // Submit quantity form using the update link
     $('.update-link').click(function(e){
         var form = $(this).prev('.update-form');
-        form.submit();
+        form[0].submit();
     })
 
     // Remove quantity form using the update link
