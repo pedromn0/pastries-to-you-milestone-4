@@ -33,7 +33,7 @@
             <div class="col-12 col-md-6 col-lg-4 mt-5">
                 <h5 class="card-title mb-0 text-purple">{{ product.name }}</h5>
                 <p class="lead mb-0 text-left font-weight-bold">€{{ product.price }}</p>
-                <p class="mb-0"><strong>Unity included:</strong> {{ product.included_unity }}</p>
+                <p class="mb-0"><strong>Unit included:</strong> {{ product.included_unity }}</p>
                 {% if product.category %}
                     <p class="mt-1 mb-0">
                         <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
