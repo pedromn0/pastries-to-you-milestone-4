@@ -18,7 +18,7 @@
     <div class="container mt-5 mb-2">
         <div class="row">
             <div class="col mt-5">
-                <h2 class="logo-font">My Profile</h2>
+                <h2>{% if user.username %} {{ user.username }}'s Profile {% else %} My Profile {% endif %}</h2>
                 <hr>
             </div>
         </div>
