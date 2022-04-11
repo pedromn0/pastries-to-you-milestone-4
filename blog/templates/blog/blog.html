@@ -24,12 +24,6 @@
                         {% for post in posts %}
                             <div class="card blog-card h-100 rounded-4 border-purple mb-3"">
                                 <div class="card-header">{{ post.slug }}
-                                    {% if request.user.is_superuser %}
-                                        <small class="mt-4">
-                                            <a href="">Edit</a> | 
-                                            <a class="text-danger" href="">Delete</a>
-                                        </small>
-                                    {% endif %}
                                 </div>
                                 <div class="card-body text-primary">
                                     <h5 class="card-title">Title: {{ post.title }}</h5>

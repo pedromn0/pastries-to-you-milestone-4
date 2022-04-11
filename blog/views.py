@@ -85,3 +85,50 @@ def add_post(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def edit_post(request, post_id):
+    """ Edit post from Blog """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can \
+            have access to that.')
+        return redirect(reverse('home'))
+
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+
+        if form.is_valid():
+            user = UserProfile.objects.get(user=request.user)
+            form.instance.post_user = user
+            post = form.save()
+            messages.success(request, 'Post Updated')
+            return redirect(reverse('blog_detail', args=[post.id]))
+        else:
+            messages.error(request, 'Failed to update this post. \
+                 Please ensure that all data was filled correctly.')
+    else:
+        form = PostForm(instance=post)
+        messages.info(request, f'You are editing {post.slug}')
+
+    template = 'blog/edit_post.html'
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def delete_post(request, post_id):
+    """ Delete a post from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can have access to that.')
+        return redirect(reverse('home'))
+
+    post = get_object_or_404(Post, pk=post_id)
+    post.delete()
+    messages.success(request, 'Post deleted!')
+    return redirect(('blog_view'))
