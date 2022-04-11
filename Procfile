@@ -1,0 +1,1 @@
+web: gunicorn pastries_to_you.wsgi:application
