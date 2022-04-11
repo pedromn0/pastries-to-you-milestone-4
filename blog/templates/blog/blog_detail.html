@@ -32,8 +32,8 @@
                         </div>
                         <div class="card-body text-primary text-black">
                             <h5 class="card-title text-purple">Title: {{ post.title }}</h5>
-                            <p class="card-text">{{ post.intro }}</p>
-                            <p>{{post.post_article }}</p>
+                            <p class="card-text"> <strong>{{ post.intro }}</strong></p>
+                            <p>{{ post.post_article | linebreaks  }}</p>
                             <a href="{% url 'blog_view' %}" class="btn btn-black rounded-4 border-purple btn mb-2">Return</a>
                             <br>
                             <div class='post-stamps mt-2'>
