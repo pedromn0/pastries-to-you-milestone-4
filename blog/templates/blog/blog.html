@@ -34,7 +34,7 @@
                                 <div class="card-body text-primary">
                                     <h5 class="card-title">Title: {{ post.title }}</h5>
                                     <p class="card-text">{{ post.intro }}</p>
-                                    <a href="#" class="btn btn-outline-black rounded-4 border-purple btn mb-2">Read More</a>
+                                    <a href="{% url 'blog_detail' post.id %}"" class="btn btn-black rounded-4 border-purple btn mb-2">Read More</a>
                                     <br>
                                     <div class='post-stamps mt-2'>
                                         <small class="text-muted mt-5"> Author: {{ post.post_user }}</small>
@@ -55,4 +55,13 @@
                 <i class="fas fa-arrow-up text-purple mx-auto my-auto"></i>
             </a>
         </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
 {% endblock %}

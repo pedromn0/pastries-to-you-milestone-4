@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container header-container">
+        <div class="row">
+            <div class="col text-center mt-3 mb-3">
+                <h2 class="logo-font">Good Reading</h2>
+            </div>
+        </div>
+        <!-- Blog section -->
+        <div class="container">
+            <div class="row-cols-1">
+                <div class="col mb-4">
+                    <div class="card blog-card h-100 rounded-4 border-purple mb-3">
+                        <div class="card-header">{{ post.slug }} 
+                            {% if request.user.is_superuser %}
+                                <small class="mt-4">
+                                    <a href="">Edit</a> | 
+                                    <a class="text-danger" href="">Delete</a>
+                                </small>
+                            {% endif %}
+                        </div>
+                        <div class="card-body text-primary text-black">
+                            <h5 class="card-title text-purple">Title: {{ post.title }}</h5>
+                            <p class="card-text">{{ post.intro }}</p>
+                            <p>{{post.post_article }}</p>
+                            <a href="{% url 'blog_view' %}" class="btn btn-black rounded-4 border-purple btn mb-2">Return</a>
+                            <br>
+                            <div class='post-stamps mt-2'>
+                                <small class="text-muted mt-5"> <i class="fas fa-user"></i> {{ post.post_user }}</small>
+                                <br>
+                                <small class="text-muted mt-5"> <i class="fas fa-clock"></i> {{ post.post_date_stamp }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Comms Section -->
+        <div class="container">
+            <div class="row-cols-1">
+                <div class="col mb-4">
+                    <div class="card rounded-4 border-purple">
+                        <div class="card-header">
+                            <small><i class="fas fa-comments"></i> Add Comment</small>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    {{ form }}
+                                </div>
+                                <input type="submit" value="Post" class="btn btn-black rounded-4 border-purple btn">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Commentary Section -->
+        <div class="container">
+            <div class="row-cols-1">
+                <div class="col mb-4">
+                    {% if comments %}
+                        <h5>Commentaries:</h5>
+                    {% endif %}
+                    {% for comment in comments %}
+                        <div class="card mb-2 rounded-4 border-purple">
+                            <div class="card-header">
+                                <small class="mt-1">
+                                    <i class="fas fa-user"></i> {{ comment.comments_user }}
+                                </small>
+                            </div>
+                            <div class="card-body">
+                                <p class="comment-text">{{ comment.comments_article }}</p>
+                                <small class="comment-details text-muted mr-5">
+                                    <i class="fas fa-clock"></i> {{ comment.comments_date_stamp }}
+                                </small>
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="btt-button shadow rounded-4 border-purple">
+            <a class="btt-link d-flex h-100">
+                <i class="fas fa-arrow-up text-purple mx-auto my-auto"></i>
+            </a>
+        </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+{% endblock %}
