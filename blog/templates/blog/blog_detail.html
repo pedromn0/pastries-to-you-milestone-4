@@ -55,15 +55,21 @@
                         <div class="card-header">
                             <small><i class="fas fa-comments"></i> Add Comment</small>
                         </div>
-                        <div class="card-body">
-                            <form action="#" method="POST">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    {{ form }}
-                                </div>
-                                <input type="submit" value="Post" class="btn btn-black rounded-4 border-purple btn">
-                            </form>
-                        </div>
+                        {% if request.user.is_authenticated %}
+                            <div class="card-body">
+                                <form action="#" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{ form }}
+                                    </div>
+                                    <input type="submit" value="Post" class="btn btn-black rounded-4 border-purple btn">
+                                </form>
+                            </div>
+                        {% else %}
+                            <div class="card-body">
+                                <p class="text-danger">Please <a href="{% url 'account_login' %}"> <strong>log in here</strong></a> to post a commentary</p>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

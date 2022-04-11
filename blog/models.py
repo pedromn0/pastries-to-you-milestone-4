@@ -11,9 +11,9 @@ class Post(models.Model):
     Model responsabile to deal with post
     """
 
-    title = models.CharField(max_length=160)
+    title = models.CharField(max_length=100)
     slug = models.SlugField()
-    intro = models.TextField()
+    intro = models.TextField(max_length=350)
     post_article = models.TextField()
     post_date_stamp = models.DateTimeField(default=timezone.now)
     post_user = models.ForeignKey(
