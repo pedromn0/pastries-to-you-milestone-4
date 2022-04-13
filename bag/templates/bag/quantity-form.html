@@ -1,0 +1,10 @@
+<form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
+    {% csrf_token %}
+    <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+</form>
+<a class="update-link btn-sm float-right text-purple p-0 m-0">
+    Update <i class="fas fa-check text-success d-sm-inline d-md-inline p-0 m-0"></i>
+</a>
+<a class="btn-sm float-left p-0 m-0 remove-item text-purple" id="remove_{{ item.item_id }}">
+    Remove <i class="fas fa-backspace text-danger d-sm-inline d-md-inline p-0 m-0"></i>
+</a>

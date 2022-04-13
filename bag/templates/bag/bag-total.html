@@ -1,0 +1,12 @@
+<h6><strong>Total selected: €{{ total|floatformat:2 }}</strong></h6>
+{% if delivery_available_delta > 0 %}
+    <h6>Only collections available in orders below €30</h6>
+{% else %}
+    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+{% endif %}
+<h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>
+{% if delivery_available_delta > 0 %}
+    <p class="mb-1 text-danger">
+        You could get delivery option by spending just <strong>€{{ delivery_available_delta }}</strong> more!
+    </p>
+{% endif %}
