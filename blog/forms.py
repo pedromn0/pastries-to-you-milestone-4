@@ -31,7 +31,8 @@ class PostForm(forms.ModelForm):
             if field:
                 placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'border-purple rounded-4 profile-form-input'
+            self.fields[field].widget.attrs['class'] = 'border-purple \
+                 rounded-4 profile-form-input'
 
 
 class CommentsForm(forms.ModelForm):

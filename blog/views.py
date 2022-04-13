@@ -54,6 +54,7 @@ def blog_detail(request, post_id):
 
     return render(request, 'blog/blog_detail.html', context)
 
+
 @login_required
 def add_post(request):
     """
@@ -70,7 +71,7 @@ def add_post(request):
         if form.is_valid():
             user = UserProfile.objects.get(user=request.user)
             form.instance.post_user = user
-            post = form.save()
+            form.save()
             messages.success(request, 'New post added')
             return redirect('blog_view')
         else:
@@ -125,7 +126,8 @@ def edit_post(request, post_id):
 def delete_post(request, post_id):
     """ Delete a post from the store """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can have access to that.')
+        messages.error(request, 'Sorry, only store owners \
+            can have access to that.')
         return redirect(reverse('home'))
 
     post = get_object_or_404(Post, pk=post_id)
