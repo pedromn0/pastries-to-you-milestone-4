@@ -33,7 +33,7 @@
                         <div class="card-body text-primary text-black">
                             <h5 class="card-title text-purple">Title: {{ post.title }}</h5>
                             <p class="card-text"> <strong>{{ post.intro }}</strong></p>
-                            <p>{{ post.post_article | linebreaks  }}</p>
+                            {{ post.post_article | linebreaks  }}
                             <a href="{% url 'blog_view' %}" class="btn btn-black rounded-4 border-purple btn mb-2">Return</a>
                             <br>
                             <div class='post-stamps mt-2'>
@@ -67,7 +67,7 @@
                             </div>
                         {% else %}
                             <div class="card-body">
-                                <p class="text-danger">Please <a href="{% url 'account_login' %}"> <strong>log in here</strong></a> to post a commentary</p>
+                                <a class="text-danger" href="{% url 'account_login' %}"> Please log in here to post a commentary</a> 
                             </div>
                         {% endif %}
                     </div>
@@ -106,11 +106,12 @@
                 <i class="fas fa-arrow-up text-purple mx-auto my-auto"></i>
             </a>
         </div>
+    </div>
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
-    <script type="text/javascript">
+    <script type>
 		$('.btt-link').click(function(e) {
 			window.scrollTo(0,0)
 		})

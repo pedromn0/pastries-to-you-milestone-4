@@ -260,3 +260,9 @@ body {
     }
 }
 
+@media (min-width: 451px){
+    .blog-card-with {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
