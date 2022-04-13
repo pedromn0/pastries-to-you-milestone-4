@@ -1,18 +1,16 @@
 # Pastries to you - Pastry E-commerce
-<img src="static/assets/project_images/responsiviness/responsiveness.png" width="100%">
+<img src="media/appCompleted.png" width="100%">
 
-[Live project link](https://my-recipes-ms3.herokuapp.com/all_recipes)
+[Live project link](https://pastries-to-you.herokuapp.com/)
 
 ## **Project Introduction**
 
-The scope of this project consists in exercise the knowledge learn up to this point with the [Code Institute](https://codeinstitute.net/all-access-coding-challenge/?utm_term=code%20institute&utm_campaign=a%26c_SEA_IRL_BR_Brand_Code_Institute&utm_source=adwords&utm_medium=ppc&hsa_acc=8983321581&hsa_cam=14304747355&hsa_grp=128775288209&hsa_ad=539453915484&hsa_src=g&hsa_tgt=kwd-319867646331&hsa_kw=code%20institute&hsa_mt=e&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiAvriMBhAuEiwA8Cs5lb4K7BEL5Kg1c8ZXfzdHRSPwEYkb_aMKSzaeFovYBDDbML-RP8UVoBoCyp4QAvD_BwE) -  software development course - and put in practise the conjunction of front end and Backend and also a database, in this case MONGODB, to operate the essential CRUD functionality with a functional app.
- 
-In this module the focus was to learn Python to work as the main language to manage the backend with the mini framework Flask and the non sequential database MongoDB.
+The scope of this project consists in practicing the knowledge learned up to this point with the [Code Institute](https://codeinstitute.net/all-access-coding-challenge/?utm_term=code%20institute&utm_campaign=a%26c_SEA_IRL_BR_Brand_Code_Institute&utm_source=adwords&utm_medium=ppc&hsa_acc=8983321581&hsa_cam=14304747355&hsa_grp=128775288209&hsa_ad=539453915484&hsa_src=g&hsa_tgt=kwd-319867646331&hsa_kw=code%20institute&hsa_mt=e&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiAvriMBhAuEiwA8Cs5lb4K7BEL5Kg1c8ZXfzdHRSPwEYkb_aMKSzaeFovYBDDbML-RP8UVoBoCyp4QAvD_BwE) -  software development course - and make a project based on the last section of the course dedicated to use of Django in conjunction with the frontend and Backend and also a database. This project is the final outcome from the whole Knowledge accrued during the course.
 
-The project idea came from a course suggestion but also a personal wish to provide a simple and functional tool for my wife who works as chef. The project scope allows the user to store her recipes in an organized, safe and accessible way from everywhere. 
+The project idea came from a course suggestion but also a personal wish to learn how to build a functional e-commerce that could be the base for a future adventure to undertake a business with my wife. The project scope allows the user to store her recipes in an organized, safe and accessible way from everywhere.
 
-Finally this project provided to me some interesting outcomes in my learning process as developer. In this project was possible to learn the fundamentals of [Python](https://www.python.org/), interact with two new frameworks - [Materialize](https://materializecss.com/) and [Flask](https://flask.palletsprojects.com/en/2.0.x/) - as it was possible as well to understand how to query and design a non-relational database - [MongoDB](https://www.mongodb.com/) - to operate CRUD operations and have access a secure informations or also manipulate them. Another important aspect was to practise basic notions in how to build a safe login and logout utilizing[Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/).
- 
+This project provided to me some new interesting outcomes in my journey to become a better developer. In this project was possible to practice more of of [Python](https://www.python.org/), HTML, CSS, but mostly with [Django](https://www.djangoproject.com/) and some of the immense possibilities this framework offers. Another important aspect was to integrate a simple version of [Stripe payments](https://stripe.com/ie?utm_campaign=paid_brand-IE_en_Search_Brand_Stripe-1615558792&utm_medium=cpc&utm_source=google&ad_content=307359047676&utm_term=kwd-295607662702&utm_matchtype=e&utm_adposition=&utm_device=c&gclid=CjwKCAjw6dmSBhBkEiwA_W-EoAMF3BDf4uNrMboFU7yCyWHTi7ndFuxxH7xc-y-oj6llv6nJ6SJaHBoCHisQAvD_BwE) in the website utilizing webhooks as well.
+
 ## **Table of Contents**
 1. [UX](#ux)
     1. [User Stories](#user-stories)
@@ -52,11 +50,57 @@ Embeded with this concept and the user stories was possible to formulate the fra
 
 ### **User Stories**
 
-#### **External user’s goal**
-Have their own access to a tool which would possibilitate store their own recipes in a simple, secure and intuitive manner. Also have access to the recipes everywhere they are and or whethever devices.
+#### **Client goals**
+
+- As a client, I want to be able to view a list of products, so that I can select some of them to purchase.
+
+- As a client, I want to be able to view each product's details, so that I can check the price, description, ingredients, image, how much unity is included, category, allergens and if it is sweet or savory.
+
+- As a client, I want to view the grand total of my purchases at any time so that I can check how much I am spending.
+
+- As a client, I want to be able to sort through the list of products, so that I can identify the best different categories, priced or by sweet or savory.
+
+- As a client, I want to be able to sort a specific product category, so that I can find the best price in each specific category and/or sort the category by name.
+
+- As a client, I want to be able to search for a product by name and/or description, so that I can find a specific product I want to purchase.
+
+- As a client, I want to be able to select the amount of the product I am buying.
+
+- As a client, I want to be able to easily select the quantity of a product when purchasing it.
+
+- As a client, I want to be able to view items in my basket to be purchased, so that I can check the total cost of my items and make sure which Items I will receive or collect.
+
+- As a client, I want to be able to adjust the amount of individual items in my basket, so that I can easily make changes before the checkout.
+
+- As a client, I want to be able to easily enter my payment information, so that I can check out without any problems.
+
+- As a client, I want to be able to make sure my private payment information is safe and secure, so that I can confidently provide the needed information.
+
+- As a client, I want to be able to view an order confirmation after the checkout, so that I can verify I haven't made any mistakes.
+
+- As a client, I want to be able to receive a confirmation by e-mail after the checkout, so that I can keep registered the order Information for any eventuality.
+
+
+#### **Shop user goal**
+- As a shop user, I want to be able to easily register my account so that I can have a personal account and be able to check my profile.
+
+- As a shop user, I want to be able to easily log in and out, so that I can access my personal information.
+
+- As a shop user, I want to be able to reset my password, so that I can recover access to my account.
+
+- As a shop user, I want to be able to have a personalized user profile, so that I can check my personal order history and the number of fidelity points accrued at the moment.
 
 #### **Site owner's goal**
-Initially offer satisfactory usability of the web application to allow users to keep using the tools and learning the process like a beta test. Later, collect user experience and feedback to improve functionality and eventually create a subscription service.
+- As a shop owner, I want to be able to add a product, so that I can add new items to my shop.
+
+- As a shop owner, I want to be able to edit and update the product, so that I can change product prices, amounts, images and more.
+
+- As a shop owner, I want to be able to delete a product, so that I can remove items that are no longer for sale.
+
+- As a shop owner, I want to be able to make sure that only I can add/edit/delete items from my shop. I want to make sure that anyone else can make changes to my products.
+
+- As a shop owner, I want to have the possibility to communicate with my customers through a blog where I will be able to see customer’s commentaries creating a small community.
+
 
 ### **Wireframe**
 
@@ -74,19 +118,14 @@ The initial wireframe consist in:
 8. Login page is a form to allow access and check the users credentials as username and password.
 9. User profile is a page to redirect the user after the correct log in where the user has all recipes created by them in one unique space. Over this page they have the possibility to access the full recipe after selecting the recipe quick view card.
 
-See in details clicking on this [Desktop Version](static/assets/project_images/wireframes/original_wireframes/desktop.png)
+See in details clicking on this [Desktop Version](media/Desktop.png)
 <p align="center">
-<img src="static/assets/project_images/wireframes/wireframes_img/desktop.png" width="90%" height="auto">
+<img src="media/Desktop.png" width="90%" height="auto">
 </p>
 
-See in details clicking on this [Tablet Version](static/assets/project_images/wireframes/original_wireframes/tablet.png)
+See in details clicking on this [Mobile Version](media/Mobile.png)
 <p align="center">
-<img src="static/assets/project_images/wireframes/wireframes_img/tablet.png" width="90%" height="auto">
-</p>
-
-See in details clicking on this [Mobile Version](static/assets/project_images/wireframes/original_wireframes/mobile.png)
-<p align="center">
-<img src="static/assets/project_images/wireframes/wireframes_img/mobile.png" width="90%" height="auto">
+<img src="media/Mobile.png" width="90%" height="auto">
 </p>
 
 ## Database
@@ -251,14 +290,15 @@ All the Technologies utilised to built this web app can be found bellow with the
 ### **Frameworks and others**
 
 - [Gitpod](https://www.gitpod.io/) as the code editor.
-- [Materialize](https://materializecss.com/) for all the core HTML sctrucutes as for buttons, navbar, grid system and helpers to deal with less unique CSS rules and more pre built solutions.
-- [Jinja-Template](https://jinja.palletsprojects.com/en/3.0.x/) was utilized in this project as placeholders in the template allowing writing similar Python code on html files to finally render the final document.
-- [Flask](https://flask.palletsprojects.com/en/2.0.x/) was used in conjunction with Python to build the functional banckend logic of the web app.
-- [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/) responsabile for harsh the password in secure form to be stored.
-- [MongoDB](https://www.mongodb.com/) is the database for this project where the documents created by user are store as for example the recipes, the user information and food tags.
+- [Bootstrap](https://getbootstrap.com/) was utilized in this project as the base for styling the webpage as some components which produce the final form of this project.
+- [Django](https://www.djangoproject.com/) was used in conjunction with Python to build the functional banckend logic of the web app and also allow the use of built in components which accelerates the development process.
+- [Stripe](https://stripe.com/) responsabile to offer an payment processor solution that was integrated within this project.
+- [SQLite](https://sqlite.org/index.html) was used in the development process as builtin django solution.
+- [Heroku Postgres](https://www.heroku.com/postgres) was after deployment to Heroku migrating from SQLite.
 - [Git](https://git-scm.com/) was used as tool to control the version of the project.
 - [Git Hub](https://github.com/) to store the project with versionament control
 - [Heroku](https://pages.github.com/) to deploy the live project.
+- [AmazonAWS - S3](https://aws.amazon.com/) to deploy all static files and media files.
 - [Balsamiq](https://balsamiq.com/) to wireframe the ideia of the website.
 - [Am I responsive](http://ami.responsivedesign.is/#) to help visualize the webiste in different screens sizes and get a print of it.
 
@@ -498,15 +538,81 @@ The solution for login and log out was implemented utilising the same idea from 
 
 ### **Media**
 
-- Only one image has a different source, this pciture was utilised as an standard picture in case the user do not paste any Picture URL in the add recipe form. This is the [reference](https://www.pinterest.ie/pin/846395323697472657/) for that image as a source being Pinterest.
+Below it is all image and respective reference used in this project: 
 
-<p align="center">
-<img src="https://i.pinimg.com/originals/d9/55/5f/d9555f88a53f6c19ef8acbb2bd679511.jpg" width="40%" height="auto">
-</p>
+1) File_Name: croissant
+[link](https://unsplash.com/photos/sqkXyyj4WdE)
+Photo by Conor Brown on Unsplash
+
+2) File_Name: Amont croissant
+[link](https://cnz.to/wp-content/uploads/2006/03/almond_croissants-2.jpg)
+
+
+3) File_Name: strawberry_cake
+[link](https://unsplash.com/photos/cZFU60dKB6U)
+Photo by amirali mirhashemian on Unsplash
+
+4) File_Name: choco_cake
+[link](https://unsplash.com/photos/kPxsqUGneXQ)§
+Photo by David Holifield on Unsplash
+
+
+5) File_Name: sourdough_bread
+[link](https://unsplash.com/photos/rYOqbTcGp1c)
+Photo by Jude Infantini on Unsplash
+
+6) File_Name: sweet_bread
+[link](https://unsplash.com/photos/tihN043cDTQ)
+Photo by Markus Winkler on Unsplash
+
+
+7) File_Name: fruit_scone
+[link](https://unsplash.com/photos/Kgcc8TKKEkg)
+Photo by Sarah Kilian on Unsplash
+
+8) File_Name: plane_scone
+[link](https://unsplash.com/photos/WCaegqiEOCo)
+Photo by Ryu Orn on Unsplash
+
+
+9) File_Name: cinamon_roll
+[link](https://unsplash.com/photos/MfdmKZDPAXM)
+Photo by David Köhler on Unsplash
+
+10) File_Name: almond_puff
+[link](https://unsplash.com/photos/GpZGDhP5WCI)
+Photo by Zach Reyes on Unsplash
+
+
+11) File_Name: jam_cookie
+[link](https://unsplash.com/photos/cOw_JxasssM)
+Photo by amirali mirhashemian on Unsplash
+
+12) File_Name: choco_cookie
+[link](https://unsplash.com/photos/Imwgit84NGo)
+Photo by Grayson Smith on Unsplash
+
+
+13) File_Name: lemon_tart
+[link](https://unsplash.com/photos/E8eJdYTTkMU)
+Photo by Konstantinas Ladauskas on Unsplash
+
+14) File_Name: strawberry_tart
+[link](https://unsplash.com/photos/WJwHXjLjkRc)
+Photo by Lili Cortez on Unsplash
+
+
+15) File_Name: Brownie
+[link](https://unsplash.com/photos/uG1jwfpCRhg)
+Photo by Ella Olsson on Unsplash
+
+16) File_Name: Macaroons
+[link](https://unsplash.com/photos/tejecyNUUhs)
+Photo by Serghei Savchiuc on Unsplash
 
 - [FontAwesome](https://fontawesome.com/) was utilised for all small icons to enhance the visual of the webiste. 
+- [Google Fonts](https://fonts.google.com/specimen/Roboto+Serif?category=Serif&query=roboto#standard-styles) was utilised as the pincipal source of font. 
 
-- The Pokeball image utilised called [pokeLogo](https://www.pikpng.com/pngvi/xxRxTm_brik-pixel-art-pokemon-pokeball-clipart/) in the project came from this website https://www.pikpng.com/
 
 ### **Acknowledgements**
 
