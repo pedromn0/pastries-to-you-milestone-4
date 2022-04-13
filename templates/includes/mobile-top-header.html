@@ -34,8 +34,9 @@
           {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
                   <a href="{% url 'add_product' %}" class="dropdown-item text-purple">Product Management</a>
+                  <a href="{% url 'add_post' %}" class="dropdown-item text-purple">Blog Management</a>
               {% endif %}
-              <a href="" class="dropdown-item text-purple">My Profile</a>
+              <a href="{% url 'profile' %}" class="dropdown-item text-purple">My Profile</a>
               <a href="{% url 'account_logout' %}" class="dropdown-item text-purple">Logout</a>
           {% else %}
               <a href="{% url 'account_signup' %}" class="dropdown-item text-purple">Register</a>
