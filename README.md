@@ -36,15 +36,7 @@ This project provided to me some new interesting outcomes in my journey to becom
 
 ## **UX**
 
-This project borned from the idea to create a simple but functional tool - online cookbook - to help the user in their regular task to store recipes in a safe place and then have access to that information everywhere. With this in mind the UX was taught to accomplish that in an intuitive way but also keeping some visual appeal.
-
-To help with this goal was chosen for me the Materialize framework to keep the constancy of the material design at some point that keeps the things simple and very intuitive. Materialize provides a big range of components, helpers and a good bunch of colors pre-formatat which possiblitated me to concentrate more in the functionality of the app but balancing that with good user experience.
-
-It is important to mention the research done to understand which kind of existing website could help to understand more about the necessities of the user in this area. One website that worked as a reference was the [Jamie Oliver](https://www.jamieoliver.com/). This website sounded like a good answer for the users interested in getting an online recipe. What was noted about that was that the website uses cards with images and has a direct communication about recipe’s information which was understood by me as a good reference thinking about user experience. Normally people interested in online recipes are interested in something quick, where with a few glances at the page they will have all the information needed. For example, how much time, which ingredientes I will need and how to prepare?
-
-<p align="center">
-<img src="static/assets/project_images/references/jamie_oliver.png" width="80%">
-</p>
+The concept of this project borned from the idea to accomplish the client, shop user and owner. The scope was thought to be functional implementing all the basic core functionalities of an e-commerce. This design from this project combines the Boutique Ado, a project from code institute, keeping the main sctruture but implementing some visual and functional aspects to match with the store idea.
 
 Embeded with this concept and the user stories was possible to formulate the framework.
 
@@ -411,97 +403,148 @@ As explained this project will work fine in at least 3 different sizes Desktop,T
 
 To deploy this project I utilised some of the mentioned technologies above to facilitate this process. This project was deployed on Heroku and connected with MongoDB.
 
-### **Creating a Repository and installing Flask**
+### **Amazon webservice S3 and IAM**
+1. First it is needed to create an account at aws.amazon.com
+2. After complete this process open search for the S3 application and then create S3 bucket named - it is recommended to use the same name of your heroku app to facilitate 
+3. In the section to create the bucket uncheck all options "Block All Public access setting"
+4. Also in this section select ACLs enabled and keep bucket owner preferred
+5. Following the next step go to the properties section, find the "Static Website Hosting" section and click to edit it
+6. Set the index.html and the error.html values because in this case they will not be used.
+7. Go to permission and click in edit on the CORS configuration and then set this configuration
+```
+[
+{
+"AllowedHeaders": [
+"Authorization"
+],
+"AllowedMethods": [
+"GET"
+],
+"AllowedOrigins": [
+"*"
+],
+"ExposeHeaders": []
+}
+]
+```
+8. Still in the permissions section and then click to edit the bucket policy and generate and set configuration or similar
+```
+{
+    "Version": "",
+    "Id": "Policy…",
+    "Statement": [
+        {
+            "Sid": "Stmt…",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::your-app/*"
+        }
+    ]
+}
 
-1. The first step were created a repository on GitHub with the name **my-recipes-milestone-3**
-2. Installed the **Gitpod** extension for **Google Chrome**;
-3. Linked **Gitpod** gaving **access** to my **GitHub profile** with my login and password;
-4. After that all repositories started to showed the **Gitpod button** just next to the button Code.
-5. Clicking in the **Gitpod button** you have access to the code editor linked with this repository.
-6. On your recent workspace created in the terminal now it is possible to install Flask. It is necessary to input the following command pip3 Install Flask.
-7. You will need to install PyMongo by using the command pip3 install flask-pymongo.
-8. And also install dnspython with the command pip3 install dnspython in the terminal.
-9. The next step is to create a file called requirements.txt in our root folder. The command in the terminal for that is touch requirements.txt.
+```
+8. In the same section click edit on the Access control list(ACL)
+9. Select the read access for the Bucket ACL to Public Access
+10. This concludes the bucket creation
+11. Search in the app or services for IAM application and then select it
+12. Click in new user group and then name it - recommendation is keep the same name for the heroku app
+13. Select "AmazonS3FullAccess" policy permission for our new user group created
+14. Follow to "policies" and then click in "create new policy"
+15. After that "import managed policy" and select the previous selected "AmazonS3FullAccess" and then click on 'import'.
+16. You will see a JSON editor to be updated with the policy "resource" to the following
+```
+Resource": [
+"arn:aws:s3:::your-heroku-app"
+"arn:aws:s3:::your-heroku-app/*"
+]
+```
+17. Then give the policy a name and click "create policy"
+18. Attach the the new policy to the user group
+19. Follow to users and create a new one
+20. Include this user to for the user your user group
+21. In the process select "programmatic access" for the access type
+22. After that Amazon will create your access or secret keys. Take note of them, AWS_SECRET_ACCESS_KEY and AWS_ACCESS_KEY_ID. Those will be used as Heroku config variables to deploy the project.
+23. In settings.py it is necessary to implement the following logic: 
+```
+if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
 
-### **Connecting MongoDB to your repository** 
-1. First you need to create a free account with [MongoDB](https://www.mongodb.com/).
-2. Once created it will be possible to create a new cluster where the database will be seated.
-3. In our new cluster we then are allowed to create a database by clicking on the button create a new database.
-4. With that and taking in consideration the Schema above it is possible to create all the collections clicking in the button create collection.
-5. After this the next step is crucial, that is get back to the gitpod code editor to create a env.py file where sensitive information will be stored and create a secure connection with the database.
-6. Create a file in the root of the project called env.py and then input those information below but replacing the key values for "SECRET_KEY", "MONGO_URI" and "MONGO_DBNAME " for their respective information.
-```
-import os
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'your-heroku-and-amazon-app-name'
+    AWS_S3_REGION_NAME = 'your-heroku-region'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-os.environ.setdefault("IP", "0.0.0.0")
-os.environ.setdefault("PORT", "5000")
-os.environ.setdefault("SECRET_KEY", ", any secure secret key)
-os.environ.setdefault("MONGO_URI", link provided by Mongo DB in accordance with your database and collections information)
-os.environ.setdefault("MONGO_DBNAME ", name of you database)
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 ```
-7. It will be necessary as well to create .gitignore file or utilising an already one created and list the env.py inside of this file:
-```
-env.py
-```
-8. The MONGO_URI you can get by accessing your cluster and then clicking on the connect button.
-9. After that you will see an option called "connect your application".
-10. In this case select Python and then copy that link and paste as a key valeu for MONGO_URI and replace **password** and **myFirstDatabase** for your Mongo database password and database name in env.py.
-11. Do not forget to make the same with the respective values for "SECRET_KEY" and "MONGO_DBNAME".
-12. Lastly import the following with an if statement on top of your app.py:
-```
-import os
-if os.path.exists("env.py"):
-    import env
-```
+24. These settings will establish the necessary connections between the heroku config variable.
+
 
 ### **Deploying to Heroku**
 
-1. The next step is to deploy the project for Heroku.
-2. First get back to your gitpod workspace or code editor.
-3. To make sure, first save the necessary requirements in the requirements.txt through the command pip3 freeze --local > requirements.txt 
-4. Create a procfile with the command 'echo web: python app.py > Procfile' without quotes.
-5. Commit those changes to your repository, using git -A, then git commit -m"" and your message and finally git push.
-6. Create a Heroku account.
-7. On your dashboard you can create a new app hitting new and then create a new app.
-8. Choose an app name with dashes -.
-9. Choose a region in this case it was Europe.
-10. To connect the app with Heroku I chose the option connect with Github.
-11. Select the repository name of your project, in my case my-recipes-milestone-3.
-12. Go to settings and in the button reveal config Vars.
-13. Now the values to be filled will need to match with the values stored in env.py.
+1. Create or login in your heroku account through heroku.com
+2. After logging in, create an app and select a region most close to you
+3.Install dj_database_url using the CLI with the pip3 install command
+4. Install psycopg2 using the CLI with the pip3 install command
+5. Import dj_database_url to your settings.py file
+6. Search for postgres in Heroku and add a Postgres, free version, database
+7. After setting the Postgres in your heroku app, copy the key in the config variable called DATABASE_URL and its respective key.
+8. After that copy DATABASE_URL's value(Postrgres database URL) from  config variables and temporarily paste it into the default database in settings.py.
+Comment temporarily the current database settings code and paste the this to make effect:
+```bash 
+  DATABASES = {     
+        'default': dj_database_url.parse("<your Postrgres key/url here>")     
+    }
+  ```
+9. Install gunicorn using the CLI with the pip3 install command
+1o. Run the command pip3 freeze > requirements.txt for both dj_database_url, psycopg2 and gunicorn being kept for the requirements.txt file
+11. After that create a Procfile with the text: web: gunicorn your-heroku-app-name-wsgi:application 
+12. Make sure the settings.py Databases is settled to connect with Heroku postgres database as described in the step 8.
+13. Make sure the debug is set to false in the settings.py file
+14. Add in settings.py:
 ```
-("IP", "0.0.0.0")
-("PORT", "5000")
-("SECRET_KEY", ", any secure secret key)
-("MONGO_URI", link provided by Mongo DB in accordance with your database and collections information)
-("MONGO_DBNAME ", name of you database)
+ALLOWED_HOSTS = ['your-heroku-app.herokuapp.com', 'localhost']
 ```
-14. In the repository and in app.py it it necessary to use this structure to connect finalise the connection with MonogDB, for that it is necessary to pass the informations from to env.py to app.py in a secure form as this:
-```
-<!-- All the imports necessary  -->
-import os
-from flask import (
-    Flask, flash, render_template,
-    redirect, request, session, url_for)
-from flask_pymongo import PyMongo
-from bson.objectid import ObjectId
-from werkzeug.security import generate_password_hash, check_password_hash
-if os.path.exists("env.py"):
-    import env
+15. Back to CLI run "python3 manage.py showmigrations" to check the status of the migrations. At this point all migrations will be needed again to the new Databases Postgres
+16. Command "python3 manage.py migrate"
+17. Command "python3 manage.py createsuperuser" to create a super/admin user to have access to Django admin
+18. If you are using fixtures to populate your database now it is the right time to do it. Command "python3 manage.py loaddata products.json" for products fixtures
+19. Repeat the same process for your categories fixtures or any other needed it
+20. In the CLI login to Heroku through the command heroku login -i and the insert your password and user
+21. Now it is necessary to disable collectstatic in Heroku prior to any code being pushed. Command “heroku config:set DISABLE_COLLECTSTATIC=1”
+22. After the success from the last operations it is possible to command “git push heroku main” to push the code to Heroku
+23. Make sure all the config variables are set in Heroku:
 
-<!-- Instances necessary for the connection  -->
+| KEY            | VALUE         |
+|----------------|---------------|
+| AWS_ACCESS_KEY_ID | `<unique aws access key>`  |
+| AWS_SECRET_ACCESS_KEY | `<unique aws secret access key>`  |
+| DATABASE_URL| `<unique postgres database url>`  |
+| EMAIL_HOST_PASS | `<unique email password(by Gmail)>` |
+| EMAIL_HOST_USER| `<store email>`  |
+| SECRET_KEY | `<unique secret key>`  |
+| STRIPE_PUBLIC_KEY| `<unique stripe public key>`  |
+| STRIPE_SECRET_KEY| `<unique stripe secret key>`  |
+| STRIPE_WH_SECRET| `<unique stripe wh key>`  |
+| USE_AWS | `True`  |
 
-app = Flask(__name__)
+24. After that it is possible to connect you app with GitHub, and enabling the automatic deployment from main
+25. After push your code to Heroku will be possible to click on the link provided to have access to you deployed application
 
-app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-
-
-mongo = PyMongo(app)
-```
-15. Go back to Heroku and click Enable Automatic deployment, keep the main branch selected and then click in deploy and wait until it finalises the process.
-It is done.
 
 
 ### **Making a Local Clone**
@@ -610,8 +653,13 @@ Photo by Ella Olsson on Unsplash
 [link](https://unsplash.com/photos/tejecyNUUhs)
 Photo by Serghei Savchiuc on Unsplash
 
+17) Fila_Name: home_background
+[link](https://unsplash.com/) the exact reference was not found but the images comes from this free website.
+
 - [FontAwesome](https://fontawesome.com/) was utilised for all small icons to enhance the visual of the webiste. 
-- [Google Fonts](https://fonts.google.com/specimen/Roboto+Serif?category=Serif&query=roboto#standard-styles) was utilised as the pincipal source of font. 
+- [Google Fonts](https://fonts.google.com/specimen/Roboto+Serif?category=Serif&query=roboto#standard-styles) was utilised as the pincipal source of font.
+- [Post-1 in the Blog](https://donalskehan.com/recipes/howth-head-seafood-chowder-2/) a snippet of the text was taken from here.
+- [Post-2 in the Blog](https://www.chefspencil.com/16-most-popular-tasty-irish-cheeses/) a snippet of the text was taken from here.
 
 
 ### **Acknowledgements**
