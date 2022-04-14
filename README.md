@@ -11,8 +11,17 @@ The project idea came from a course suggestion but also a personal wish to learn
 
 This project provided to me some new interesting outcomes in my journey to become a better developer. In this project was possible to practice more of of [Python](https://www.python.org/), HTML, CSS, but mostly with [Django](https://www.djangoproject.com/) and some of the immense possibilities this framework offers. Another important aspect was to integrate a simple version of [Stripe payments](https://stripe.com/ie?utm_campaign=paid_brand-IE_en_Search_Brand_Stripe-1615558792&utm_medium=cpc&utm_source=google&ad_content=307359047676&utm_term=kwd-295607662702&utm_matchtype=e&utm_adposition=&utm_device=c&gclid=CjwKCAjw6dmSBhBkEiwA_W-EoAMF3BDf4uNrMboFU7yCyWHTi7ndFuxxH7xc-y-oj6llv6nJ6SJaHBoCHisQAvD_BwE) in the website utilizing webhooks as well.
 
+**Stripe test card for the checkout is:**
+| KEY            | VALUE         |
+|----------------|---------------|
+| Card number: | 4242 4242 4242 4242 |
+| Expire date: | 04 / 24 or any other  |
+| CVC: | any three digits number or 242  |
+| Zip: | 42424 or any other |
+
+
 ## **Table of Contents**
-1. [UX](#ux)
+1. [UX and General Design](#ux-and-general-design)
     1. [User Stories](#user-stories)
     1. [Wireframe](#wireframe)
     1. [Database](#database)
@@ -26,15 +35,13 @@ This project provided to me some new interesting outcomes in my journey to becom
         - [Defensive Programming](#defensive-programming)
     1. [Responsiveness](#responsiveness)
 1. [Deployment](#deployment)
-    1. [Creating a Repository and installing Flask](#creating-a-repository-and-installing-flask)
-    1. [Connecting MongoDB to your repository](#connecting-mongodb-to-your-repository)
+    1. [Deployment to Amazon S3 IAM](#amazon-webservice-s3-and-iam)
     1. [Deploying to Heroku](#deploying-to-heroku)
-    1. [Making a Local Clone](#making-a-local-clone)
 1. [Credits](#credits)
     1. [Media](#media)
     1. [Acknowledgements](#acknowledgements)
 
-## **UX**
+## **UX and General Design**
 
 The concept of this project borned from the idea to accomplish the client, shop user and owner. The scope was thought to be functional implementing all the basic core functionalities of an e-commerce. This design from this project combines the Boutique Ado, a project from code institute, keeping the main sctruture but implementing some visual and functional aspects to match with the store idea.
 
@@ -261,7 +268,7 @@ All the Technologies utilised to built this web app can be found bellow with the
 ### **Languages**
 - [HTML](https://en.wikipedia.org/wiki/HTML) to build the whole structure of the landing page.
 - [CSS](https://en.wikipedia.org/wiki/CSS) to style the webiste.
-- [JavaScript](https://en.wikipedia.org/wiki/JavaScript), more specifically [Jquery](https://jquery.com/) was use it to personalize some materialize components.
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript), more specifically [Jquery](https://jquery.com/) was use it to personalize some bootstrap components.
 - [Python](https://www.python.org/) to build majority of the backend instructions on app.py file.
 
 ### **Frameworks and others**
@@ -282,111 +289,83 @@ All the Technologies utilised to built this web app can be found bellow with the
 
 ## **Testing**
 
-The automated test utilised were [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) to test general performance, [W3C Markup](https://validator.w3.org/nu/) validation service for the find any inconsistency in the HTML and  [W3C Jigsaw CSS](https://jigsaw.w3.org/css-validator/#validate_by_input) validation service for CSS and [Jshin](https://jshint.com/) for JavaScript.
+The automated test utilised were [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) to test general performance, [W3C Markup](https://validator.w3.org/nu/) validation service for the find any inconsistency in the HTML and  [W3C Jigsaw CSS](https://jigsaw.w3.org/css-validator/#validate_by_input) validation service for CSS.
 
-All the possible erros founded by W3C validators were corrected less those ones being part of bootstrap Frameworks. The same can be said by the Jshin valitadion where there were no errors being displayed.
+All the possible erros founded by W3C validators were corrected less those ones being part of bootstrap Frameworks or Django.
 
 All the results can be seeing below.
 
 Google Lighthouse results:
 <p align="center">
-<img src="static/assets/tests/lighthouse/lighthouse.png" width="90%" height="auto">
+<img src="media/lighthouse.png" width="90%" height="auto">
 </p>
 
-W3C Markup of all html templates. They were tested and got the same results:
+W3C Markup almost all html templates got this result. They were tested with an manual inpunt in the toll using the source code after ther render on the browser to avoid erros from django templates:
 <p align="center">
-<img src="static/assets/tests/html_validation/home.png" width="90%" height="auto">
+<img src="media/html_validation.png" width="90%" height="auto">
+</p>
+
+An error example is this one that was not possible to correct because of the form the checkout was implemented hidden the mobile visualiztion but still being presented on the html sctrucute:
+<p align="center">
+<img src="media/mobile_checkout_error.png" width="90%" height="auto">
 </p>
 
 W3C Jigsaw CSS for style.css results:
 <p align="center">
-<img src="static/assets/tests/css_validation/CSS.png" width="90%" height="auto">
+<img src="media/css_validation.png" width="90%" height="auto">
 </p>
 
-The only Javascript utilised in this project was to activate the Materialize components but with Jquery for that reason there is no checker result.
+**Python corrections**
+For correct PEP8 it was used the command:"python3 -m flake8" and then correcting line by line in order to eliminate them from the list. The majority of errors were related to indentiont with line too large or even lack of space or too much space.All possible to correct were done but without incurring in the risk to change the functionality of the code or then in cases that were related to automatic files created for Django.
 
-PEP8 Online result before correction for app.py
+### **Manual Tests and Notable Bugs**
+The website was manually tested to check if it was working properly in all functionalities. Many attempts to run the app were executed, making orders, adding and removing from the bag, editing products, delete products, adding products with url pictures or jpeg images. Also, the same was done regarding the blog section with edit, add and delete for post and the possibility to add posts. 
+
+Tests using login using Django allauth were done to understand if they were all functional, registering, loggin, resetting passwords and receiving email to confirm those possibilities. 
+
+Thests with the sending of email confirming the order for both cases when the Delivery option was associated or not and in both cases the user was receiving the correct message.
+
+Following that I can confirm that in all my best capabilities the app is working as initially intended.
+
+#### **Deployment to Heroku Error**
+After the deployment the process and with the build already completed and the message of success my app was not opening. Then to further investigate I used to command ```heroku logs --tail``` and the I could seen the error message below:
+
 <p align="center">
-<img src="static/assets/tests/pep8_validation/before.png" width="90%" height="auto">
+<img src="media/heroku_deployment_error.png" width="90%" height="auto">
 </p>
 
-PEP8 Online result after correction for app.py
-<p align="center">
-<img src="static/assets/tests/pep8_validation/after.png" width="90%" height="auto">
-</p>
+After investigating in the CI Slack channel and also in the Heroku documentation I found a solution through two steps.
 
-### **Mannual Tests and Notable Bugs**
-The website was manually tested to check if it was working properly in all functionalities. Many attempts to run the app were executed and I can confirm in all the best of my capabilities it is working as initially was intended. All redirections, check of password, the CRUD operations, all links logged in or logged out and a big learning process with defensive programming. Above are some importants outcomes coming from those tests and meeting with my mentor that shows some important isssues that should be to tackle. 
+First it was necessary to restart the Heroku Dynos following this [documentation](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-dyno-restart-dyno) through the command ```heroku dyno:restart```. This eliminated half the errors displayed.
 
-#### **Empty URL's Picture input form**
-One noticed issue is related to the URL's Picture input that is not a requirement for filling the form due to turning this experience to fill the form a little bit friendly. However, allowing the image card without an image would bring that aspect of the card empty, breaking the regular format of this Materialize component. The solution implemented was via backend through a if statement which will check the front end if that input was empty and then completing that input with a standard image. 
-
-As it is possile to see in the add_recipe function was added two variable. One wite regular reques.form.get and other with the valueo of the standard Picture URL.
-```
-url_picture = request.form.get('url_picture')
-url_replace = ('https://i.pinimg.com/originals/'
-                'd9/55/5f/d9555f88a53f6c19ef8acbb2bd679511.jpg')
-```
-
-With that was done a simple check if that field was empty or not:
-```
-if url_picture:
-    recipe = {
-                    "recipe_name": request.form.get('recipe_name'),
-                    "food_type": request.form.get('food_type'),
-                    "estimated_time": request.form.get('estimated_time'),
-                    "url_picture": url_picture,
-                    "commentary": request.form.get('commentary'),
-                    "ingredients_list": ingredients_list,
-                    "method": method,
-                    "created_by": session['user'],
-                    "user_id": ObjectId(user['_id'])
-                }
-```
-
-Or if it is false I would insert in the database the all the same structure above but replacing url_picutre key value for this:
-```
-"url_picture": url_replace,
-```
-
-This solutioned the issue preserving overall good visual for those cards. 
+Then the second step was to implement all the config variables in Heroku, for example the Stripe ones, and then restart Gitpod and finally the error was gone and the project starts to run on Heroku servers.
 
 #### **Defensive Programming**
 
-This was something really important brought from my mentor in the meetings. This is understandably an important aspect of this project because it brought light to the security aspect of the data being stored in the database by taking care of the url route and information passed through it. So in that way a two layer of security was implemented to preserve or avoid that someone could understand the route for example "delete_recipe/recipe" and or even edit the recipe without being initially authorized to do that.
+The implementation of the security in this project was a bit different taking in consideration the previous one. Django has some built-in solutions as the use of decorators in conjunction with django templates logic using if statments  and session.user to avoid that untentionally path can be reach. 
 
-The two layers implemented were first about checking if there is a user session logged and that solution was possible thanks to Flask. The second layer of protection is related to the check between the user_id logged and the user_id storaged in the recipe collection. This second form of protections works assuring the same user that is trying to delete or update or even getting access to user Profile will be redirected avoiding anyone with the right route and information to have access in something that they would not be allowed to do so.
-
-So the logic created to implement this was as below:
+Below is possible to visualise one example the logic created to implement this:
 ```
-if "user" in session:
-        user = mongo.db.users.find_one({"username": session['user']})
-        user_id = ObjectId(user['_id'])
-        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-        recipe_user_id = ObjectId(recipe['user_id'])
-
-        if user_id == recipe_user_id:
+{% if request.user.is_authenticated %}
+    {% if request.user.is_superuser %}
+        <a href="{% url 'add_product' %}" class="dropdown-item text-purple">Product Management</a>
+        <a href="{% url 'add_post' %}" class="dropdown-item text-purple">Blog Management</a>
+    {% endif %}
 ```
 
-And for the user profile page a check was implemented to just grab a user logged to change his username for another username. The logic created check if the user session is equal to the user passed through the route:
-```
-def profile(username):
-    if "user" in session:
-
-        if session['user'] == username:
-```
-
-In all the cases above the user is redirected to the login page or to no_authorized page receive a flash message and a link to get back the all recipes page.
+In cases manually this path is tried the user will get redirected to the login page.
 
 ### **Responsiveness**
 
-This project was developed to work in a diverse range of screens. All the components from Materialize and it’s Grid system are responsive and were added to them with personalized CSS to improve their capabilities in delivering a better UX and achieve satisfactory usage. With big screens more information will be shown in more comfortable form by the website having enough responsiveness to scale in small screens.
+This project was developed to work in a diverse range of screens. All the components from Bootstrap and it’s Grid system are responsive and were added to them with personalized CSS to improve their capabilities in delivering a better UX and achieve satisfactory usage. With big screens more information will be shown in more comfortable form by the website having enough responsiveness to scale in small screens.
 
 As explained this project will work fine in at least 3 different sizes Desktop,Tablet and mobile. To achieve this the website has been tested on several possible devices, from 11 "or 13" inch Macs, Google Chrome developer tools, variable Android phones of friends and relatives.
 
 ## **Deployment**
 
-To deploy this project I utilised some of the mentioned technologies above to facilitate this process. This project was deployed on Heroku and connected with MongoDB.
+To deploy this project it was utilized by Heroko with static collect disabled and Amazon Web service S3 for the static files and IAM and all media files were stored with Amazon as well.
+
+The process of deploying involves creating an Heroku app setting to not collect static and then implementing the setting with Amazon web service, configure all variables in heroku and after all push everything to it.
 
 ### **Amazon webservice S3 and IAM**
 1. First it is needed to create an account at aws.amazon.com
@@ -530,39 +509,13 @@ ALLOWED_HOSTS = ['your-heroku-app.herokuapp.com', 'localhost']
 24. After that it is possible to connect you app with GitHub, and enabling the automatic deployment from main
 25. After push your code to Heroku will be possible to click on the link provided to have access to you deployed application
 
-
-
-### **Making a Local Clone**
-
-1. Log in to your [GitHub](https://github.com/), locate the repository [pedromn0/my-recipes-milestone-3](https://github.com/pedromn0/my-recipes-milestone-3).
-2. Inside the repository locate the button Code and then click on "Clone or download".
-3. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
-4. In your terminal open Git Bash.
-5. Then you can change the current working directory to a directory that suits you in your computer.
-6. Type `git clone`, and then paste the URL you copied earlier.
-
-
 ## **Credits**
 
-All images utilised to fill some recipes were taken from the same source the [Jamie Oliver](https://www.jamieoliver.com/) website as the content of the recipes as well.
+All images were credited below as the text not created by me.
 
-A significant part of the main structure code has been written following [Code institute task manager - mini project](https://learn.codeinstitute.net/)
+A significant part of the main structure code has been written following [Code institute Boutique Ado Project](https://github.com/Code-Institute-Solutions/boutique_ado_v1)
 
-A variety of components of this Project came from [Materialize](https://materializecss.com/) as Moodal, Grid sytem, image-cards, pallet of colours, Navbar and SideNav, Footeres, Forms and also some CSS helpers and styles.
-
-Code instiute Slack channel was utilised as a referece to solve one bug related to how to correct populate a textarea html tag coming from my MongoDB and a collection which is stores data as an array. The ideia is keep each array index as a line inside textarea html tag.
-
-```
-<textarea placeholder="One item per line;" id="ingredients_list" name="ingredients_list" class="materialize-textarea">
-
-<!-- This if but not the for loop -->
-{%- if recipe != "NEW" -%} 
-    {%- for ingredient in recipe.ingredients_list -%} 
-        {{ ingredient }} &#13;&#10;
-    {%- endfor -%}
-{%- endif -%}</textarea>
-```
-The solution for login and log out was implemented utilising the same idea from the mini project which lays on [werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/) to safally store the users credentials.
+Code instiute Slack channel was utilised as a referece to help understand different issues during the development of this project, but not was essentially used.
 
 ### **Media**
 
