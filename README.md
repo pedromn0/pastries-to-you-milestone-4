@@ -38,7 +38,7 @@ This project provided to me some new interesting outcomes in my journey to becom
 
 The concept of this project borned from the idea to accomplish the client, shop user and owner. The scope was thought to be functional implementing all the basic core functionalities of an e-commerce. This design from this project combines the Boutique Ado, a project from code institute, keeping the main sctruture but implementing some visual and functional aspects to match with the store idea.
 
-Embeded with this concept and the user stories was possible to formulate the framework.
+Embeded with those ideas and the user stories from below was possible to formulate the framework.
 
 ### **User Stories**
 
@@ -96,19 +96,9 @@ Embeded with this concept and the user stories was possible to formulate the fra
 
 ### **Wireframe**
 
-As a result of the above, the concept of the website was idealised taking in consideration some research and the user stories. The wireframe was design to deliver all the functions needed to create, read, update and delete the recipes (CRUD actions) but also guaranteeing a basic secure functions just allowing the right user to have access to some of that functions as UPDATE and DELETE, but allowing access to read and create their own recipes.
+As a result of the above the wireframe was design to deliver all the functions needed such as search for the ideal product, have details of each of those products, the possibility to select that item and quantity, a bag to temporary storage those items, a checkout process and a confirmation for each order as a form to have a history.
 
-The initial wireframe consist in: 
-
-1. Navbar with the following options - All Recipes, Profile, Add Recipes, Log in, Log out and Register. Depending on the user in session or not some options will be shown or not.
-2. Sidebar with the following options - All Recipes, Profile, Add Recipes, Log in, Log out and Register. Depending on the user in session or not some options will be shown or not.
-3. All Recipes home pages consist of a search bar and the all cards that function as quick viewers to the recipes available to everyone. In each card there is a button to access the complete information of the recipe.
-4. Each recipe page has an image, general commentary, list of ingredients, method or preparation, time estimated, food tag and who created that recipe. 
-5. Add recipe consist of the same information provided in the recipe page but in format of a form to be filled and storaged, plus two buttons cancel and add to action that function.
-6. Edit recipe brings all the data filled in the add page with the possibility to edit them and action this function with the addition of three buttons cancel, delete and update.
-7. Register page is a form simple page to fill with the credentials to have full access to the functionalities of the website. The inputs necessary are username, password and confirm password. This option was posterior alterated along the developing process to firstname, username, password and confirm password.
-8. Login page is a form to allow access and check the users credentials as username and password.
-9. User profile is a page to redirect the user after the correct log in where the user has all recipes created by them in one unique space. Over this page they have the possibility to access the full recipe after selecting the recipe quick view card.
+With that in mind the initial wireframe was designed to accomplish all the core necessities: 
 
 See in details clicking on this [Desktop Version](media/Desktop.png)
 <p align="center">
@@ -122,152 +112,147 @@ See in details clicking on this [Mobile Version](media/Mobile.png)
 
 ## Database
 
-The database chose for this project was the MongoDB for all well non capabilites of this resource and for fit the project requirements.
+The database in this project was integrated following the Django solution, consisting of configuring the called models in order to create the tables with SQLite. The main goal in this project was to understand the potential of this built in solution. This format accelerates the development process minimizing the necessities to deal some time with more complex queries to proceed with CRUD operations.
 
 The desing or Schema was defined as bellow:
 
-- **Database and Collections name**
-```
-my_recipes
-    food_tags
-    recipes
-    users
-```
-### Collections
+**Category and Product Models**
 
-- **food_tags**
+Category:
 ```
-{
-    "_id":{"ObjectId":""},
-    "food_type":"Tea Treatments"
-}
-```
-- **recipes**
-```
-{
-    "_id":{"ObjectId":""},
-    "recipe_name":"string",
-    "food_type":"string",
-    "estimated_time":"string",
-    "url_picture":"",
-    "commentary":"string",
-    "ingredients_list":[Array],
-    "method":[Array],
-    "created_by":"string",
-    "user_id":{"ObjectId":""}
-}
+name = models.CharField
+friendly_name = models.CharField
 ```
 
-- **users**
+Product:
 ```
-{
-    "_id":{"ObjectId":""},
-    "firstname":"string",
-    "username":"string",
-    "password":"werkzeug_salted_harsh"
-}
+category = models.ForeignKey('Category',
+sku = models.CharField
+name = models.CharField
+description = models.TextField
+price = models.DecimalField
+sweet_sauvory = models.CharField
+included_unity = models.CharField
+allergens = models.CharField
+image_url = models.URLField
+image = models.ImageField
 ```
+
+The connection between those models are set for the **ForeignKey Category** into products model.
+
+**Order and Orderline Models**
+
+Order:
+```
+order_number = models.CharField
+user_profile = models.ForeignKey(UserProfile,
+full_name = models.CharField
+email = models.EmailField
+phone_number = models.CharField
+country = CountryField
+postcode = models.CharField
+town_or_city = models.CharField
+street_address1 = models.CharField
+street_address2 = models.CharField
+county = models.CharField
+date = models.DateTimeField
+delivery_cost = models.DecimalField
+order_total = models.DecimalField
+grand_total = models.DecimalField
+original_bag = models.TextField
+stripe_pid = models.CharField
+```
+
+In the order there is a connection between this and the **UserProfile** models set by **ForeignKey user_profile**.
+
+Ordeline:
+```
+order = models.ForeignKey(Order,
+product = models.ForeignKey(Product,
+quantity = models.IntegerField
+lineitem_total = models.DecimalField
+```
+
+The connection between the **Order** models and the **Orderline** was established by the **ForeignKey Order** into Ordeline model.
+
+**UserProfile Model**
+
+UserProfile:
+```
+user = models.OneToOneField(User, on_delete=models.CASCADE)
+default_phone_number = models.CharField
+default_street_address1 = models.CharField
+default_street_address2 = models.CharField
+default_town_or_city = models.CharField
+default_county = models.CharField
+default_postcode = models.CharField
+default_country = CountryField
+```
+
+This models was used connected in different model as **ForeignKey** for its capacity to bind user information to other models creating an important data association.
+
+**Post and Comments Model**
+
+Post:
+```
+title = models.CharField
+slug = models.SlugField
+intro = models.TextField
+post_article = models.TextField
+post_date_stamp = models.DateTimeField
+post_user = models.ForeignKey(UserProfile,
+```
+In the Post model there is a connection between this and the **UserProfile** models set by **ForeignKey UserProfile** to register each new post with the author.
+
+Comments:
+```
+post = models.ForeignKey(Post,
+comments_user = models.ForeignKey(UserProfile,
+comments_article = models.TextField
+comments_date_stamp = models.DateTimeField
+```
+
+In the Comments model there is a connection between this and the **UserProfile** models set by **ForeignKey UserProfile** but also the Post model through **ForeingKey Post** to have the possibility to attach each comments to the respective Post blog.
+
 
 ## **Features**
 
-The initial design suffered some fewers changes to accommodate better user experience and the overall functionality of the app. Below are all the actual functionalities that were possible to implement and those which were not possible to do it.
- 
-1. Navbar & Sidebar for general navigation;
+As expected the initial design suffered some changes to accommodate better all the functions and user experience. Below there are all the major functionalities that were possible to implement and those which were not possible to do it.
 
-2. All Recipes page - Search function, recipe quick view cards with a button to access the full recipe;
-
-3. Individual recipe page - full visualization of the recipe, for users correct logged in and owner of the recipes Delete and Update function; 
-    
-4. Profile's page - Welcome message and user's own recipe quick view cards with a button to access the full recipe;
-
-5. Add recipe page - an empty form with all the inputs to add a new recipe and one buttons to action the data insertion;
-
-6. Edit recipe page - a filled form with with recipe’s information with two buttons cancel and update;
-
-7. Log in page - simple form to check the user's credential username and password;
-
-8. Log out page - a navbar link responsabile for end an user session;
-
-9. Register page - a form to collect initial and register the initial user credentials.
-    
 ### **Existing Features**
-Below will be possible to take a look in some of the important features of this project.
-
-#### **Base html and Extended usage**
-
-The first important feature but one that figures just behind the scenes is the advent of [Jinja-extension](https://jinja.palletsprojects.com/en/3.0.x/templates/?highlight=extend#template-file-extension) which allows a very interesting possibility to create one base html file and then extend its use to all other html templates necessary through the project. This makes easier to implement any update in the html files.
-
-This resource was greatly utilised during the development of this project.
-
-It is possible to block the content you intend to not extend by following the above:
-
-```
-<main class="container">
-    {% block content%}
-
-    {% endblock %}
-</main>
-
-```
-
-Then at the top of each new html file it is necessary to extend the base html:
-
-```
-{% extends "base.html" %}
-{% block content %}
-```
-
-#### **Navbar & Sidebar**
-
-- The **Navbar** & **Sidebar** were implemented on this project to complete their functional task to be the main form of navigation through all the possibilities offered by the website. They were designed by Materialize Framework and edited in the visual to match the identity of this project. This feature allows the user to reach links for All Recipes, Profile, Add Recipes, Log in, Log out and Register.
-
-    - If there is no user logged in the navbar will show **All Recipes**, **Log in** and **Register** links.
-
-    - If instead there is an user logged in the links shown will be **All Recipes**, **Add Recipes**, **Profile** and **Log out**.
-
-    This personalised usage in accordance with an user logged or not was possible by an implementation with [Jinja-Template](https://jinja.palletsprojects.com/en/3.0.x/) which empowers the html with logic to check session user a [Flask](https://flask.palletsprojects.com/en/2.0.x/) recourse which allows archiving some information through cookies as the username of the user in question.
-
-    ```
-    {% if session.user %}
-        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-        <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
-    {% else %}
-        <li><a href="{{ url_for('login') }}">Log in</a></li>
-    {% endif %}
-    {% if session.user %}
-        <li><a href="{{ url_for('logout') }}">Log out</a></li>
-    {% else %}
-        <li><a href="{{ url_for('register') }}">Register</a></li>
-    {% endif %}
-    ````
-
-#### **All Recipes page** 
- In the first place there is a search bar which will look for recipe name or tag name. It is necessary to use the buttons to complete an action such as for finding a recipe pressing the search button or clearing the result bringing back the regular recipes.
-
-These feature was possible thanks to the use of [MongoDB indexes](https://docs.mongodb.com/manual/indexes/) that was created based in the collection recipes but more specifically with the document recipe_name and food_type. 
-
- ```
-recipe_name_text_food_type_text
- ```
-
- Here it is possible to understand the logic to request the information for mongoDB and then bring the result.
- ```
- <!-- Request the value in the search bar and then replace in the syntax to search in mongodb -->
-def search():
-    query = request.form.get("query")
-    recipes = mongo.db.recipes.find({"$text": {"$search": query}})
-    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
- ```
-
-The cards utilized to show the basic information come from [Materialize](https://materializecss.com/cards.html) and they were stylised to being in consonance with the general UX idea. The idealisation of the cards was to summarise the main recipe information in a visual manner. Following this guidance the cards showed the time estimated, name, picture of the recipe, food tag or classification and a link for the full recipe.
-
-#### **Profile's page**
-This is the page where the user is redirected everytime it is log in with theirs credentials and where they can have access as a specie of a shortcut of all their own recipes making easier to, read, edit or delete any of them.
+Below will be possible to take a look at some of the important features of this project.
  
+1. Navbar & Sidebar for general navigation with all the major categories and filters;
 
-### **Features Left to Implement**
-- What was not possible to implement due to a lack of time was a favourite option in which the user would have the possibility to hit a btn to favourite that recipe which would order those fav recipes in first place on the profile page.
-- Another feature not possible to implement was the option to input an youtube recipe url and attach this to the recipe itelses utilizing an iframe the google solution to embedded video from the platform in the website.
+2. A search bar to query the products or description in the database and return the value expected.
+
+3. Home invites the user to search, know the products by the category, price, taste and more.
+
+4. All products where possible to select a more detailed view clicking in it card or use a filter to a more precise search experience.
+
+5. Individual product page - full visualization of the product details and possibility to add in the shop card. For super users logged in the possibility to delete and update the product.
+
+6. Bag page - after select some product and clicking on the bag or the notification system the page exhibited will show up a summary of the items selected, price, quantity, delivery cost or if it is an available options, two buttons one to return and other to proceed to Stripe checkout but also an option to adjust the quantity or even remove for complete the item from bag.
+    
+7. Checkout - this page will exhibit and form to complete with personal detail and Stripe elements to complete the order. Once more in this process the user will be notified about the availability or not from the delivery option. 
+
+8. Checkout success - After completing an order the user will be presented with a checkout confirmation and a notification that an email will be sent to summarize the actual order.
+
+9. Login system - Django provides a secure login system that was implemented in this app allowing users to create a new user, receive an email for confirmation, recover forgotten passwords and all in mannerly safety form.
+
+10. My Profile - user will have saved their personal details for future orders in order to make it simpler the next time. Also, the user will have a history of all the orders effectuated in this page with the possibility to access the complete info as register.
+
+11. Blog and comments - in the almost separate section the idea is to create a communication channel between the site owner or chef and their customer providing Knowledge blog posts and receiving comments but this latter option only available for logged users. 
+
+12. Blog Management - The site owner also accumulates another function to include new posts, edit or even delete them all together.
+
+13. Product Management - The site owner also accumulates another function to include new products, edit or even delete them.
+    
+### **Features Left To Implement**
+For the lack of time it was not possible to implement a function to count the number of orders and after completing 10 the next order would give some percentage of discount as a simple form to create a sense of fidelity with the customer.
+
+Another feature that was not implemented was the function for the store owner to have the possibility to delete comments from users in case of need using the frontend in the same manner it is possible to do with posts.
+
 
 ## **Technologies Used**
 
